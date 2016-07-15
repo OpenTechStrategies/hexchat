@@ -550,6 +550,7 @@ buf_get_line (char *ibuf, char **buf, int *position, int len)
 	return 1;
 }
 
+/* KFF: this is where the match primitive lives. */
 int match(const char *mask, const char *string)
 {
   register const char *m = mask, *s = string;

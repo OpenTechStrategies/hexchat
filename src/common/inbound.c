@@ -230,6 +230,18 @@ alert_match_word (char *word, char *masks)
 	if (masks[0] == 0)
 		return FALSE;
 
+        /* KFF: for debugging */
+        {
+          FILE *fp;
+          fp = fopen ("/tmp/kff-hexchat-debug.log", "a");
+          fprintf (fp, "KFF: alert_match_word(): word and masks (on entry):\n");
+          fprintf (fp, "     word:  '%s'", word);
+          fprintf (fp, "     masks: '%s'", masks);
+          fprintf (fp, "KFF: alert_match_word(): END of text (on entry):\n");
+          fprintf (fp, "\n");
+          fclose(fp);
+        }
+
 	while (1)
 	{
 		/* if it's a 0, space or comma, the word has ended. */
@@ -260,6 +272,17 @@ alert_match_text (char *text, char *masks)
 
 	if (masks[0] == 0)
 		return FALSE;
+
+        /* KFF: for debugging */
+        {
+          FILE *fp;
+          fp = fopen ("/tmp/kff-hexchat-debug.log", "a");
+          fprintf (fp, "KFF: alert_match_text(): text (on entry):\n");
+          fprintf (fp, "     '%s'", text);
+          fprintf (fp, "KFF: alert_match_text(): END of text (on entry):\n");
+          fprintf (fp, "\n");
+          fclose(fp);
+        }
 
 	while (1)
 	{
@@ -309,6 +332,8 @@ is_hilight (char *from, char *text, session *sess, server *serv)
 
 	text = strip_color (text, -1, STRIP_ALL);
 
+        /* KFF: This is probably the departure point-of-interest for
+           nick highlighting. */
 	if (alert_match_text (text, serv->nick) ||
 		 alert_match_text (text, prefs.hex_irc_extra_hilight) ||
 		 alert_match_word (from, prefs.hex_irc_nick_hilight))
