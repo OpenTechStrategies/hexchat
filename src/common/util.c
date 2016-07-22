@@ -556,33 +556,6 @@ int match(const char *mask, const char *string)
   register char ch;
   const char *bm, *bs;		/* Will be reg anyway on a decent CPU/compiler */
 
-  /* Handle the case of single leading hyphen specially.  It's
-     possible that STRING is a nickname, and if so, we want to
-     match the corresponding mask even if STRING starts with '-'.
-     Why?  Because of this common circumstance:
-
-     If speaker Q hasn't identified to the server, then sometimes
-     everything Q says is prefixed with a leading '-' (whether this
-     happens or not depends on various settings).  However, if Q is
-     speaking to HexChat user N, and Q begins each line with N's nick
-     (as is common etiquette in some chat rooms), then when Q says
-     something like "N: hi there", N will see "-N: hi there".
-
-     However, the presence of the leading "-" in "-N" will cause Q's
-     speaker nick to *not* be highlighted for N, even though N's
-     preferences say that such highlighting should happen for any line
-     in which someone says "N".
-
-     Since https://tools.ietf.org/html/rfc2812#section-2.3.1
-     specifies that '-' isn't allowed as the first character of a
-     nickname, and in any case it's quite likely that someone who
-     wants "N" matched probably also wants "-N" matched (since lone
-     leading hyphens are rare and usually do not represent a distinct
-     word from the same word without the hyphen), here we strip off a
-     single leading hyphen from STRING before matching. */
-  if (s[0] == '-')
-    s++;
-
   /* Process the "head" of the mask, if any */
   while ((ch = *m++) && (ch != '*'))
     switch (ch)
