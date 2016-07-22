@@ -231,16 +231,10 @@ alert_match_word (char *word, char *masks)
 		return FALSE;
 
         /* KFF: for debugging */
-        {
-          FILE *fp;
-          fp = fopen ("/tmp/kff-hexchat-debug.log", "a");
-          fprintf (fp, "KFF: alert_match_word(): word and masks (on entry):\n");
-          fprintf (fp, "     word:  '%s'", word);
-          fprintf (fp, "     masks: '%s'", masks);
-          fprintf (fp, "KFF: alert_match_word(): END of text (on entry):\n");
-          fprintf (fp, "\n");
-          fclose(fp);
-        }
+        fprintf (stderr, "KFF: alert_match_word(): word and masks (on entry):\n");
+        fprintf (stderr, "     word:  '%s'\n", word);
+        fprintf (stderr, "     masks: '%s'\n", masks);
+        fprintf (stderr, "\n");
 
 	while (1)
 	{
@@ -274,15 +268,10 @@ alert_match_text (char *text, char *masks)
 		return FALSE;
 
         /* KFF: for debugging */
-        {
-          FILE *fp;
-          fp = fopen ("/tmp/kff-hexchat-debug.log", "a");
-          fprintf (fp, "KFF: alert_match_text(): text (on entry):\n");
-          fprintf (fp, "     '%s'", text);
-          fprintf (fp, "KFF: alert_match_text(): END of text (on entry):\n");
-          fprintf (fp, "\n");
-          fclose(fp);
-        }
+        fprintf (stderr, "KFF: alert_match_text() (on entry):\n");
+        fprintf (stderr, "     text:  '%s'\n", text);
+        fprintf (stderr, "     masks: '%s'\n", masks);
+        fprintf (stderr, "\n");
 
 	while (1)
 	{
