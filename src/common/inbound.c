@@ -230,12 +230,6 @@ alert_match_word (char *word, char *masks)
 	if (masks[0] == 0)
 		return FALSE;
 
-        /* KFF: for debugging */
-        fprintf (stderr, "KFF: alert_match_word(): word and masks (on entry):\n");
-        fprintf (stderr, "     word:  '%s'\n", word);
-        fprintf (stderr, "     masks: '%s'\n", masks);
-        fprintf (stderr, "\n");
-
 	while (1)
 	{
 		/* if it's a 0, space or comma, the word has ended. */
@@ -266,12 +260,6 @@ alert_match_text (char *text, char *masks)
 
 	if (masks[0] == 0)
 		return FALSE;
-
-        /* KFF: for debugging */
-        fprintf (stderr, "KFF: alert_match_text() (on entry):\n");
-        fprintf (stderr, "     text:  '%s'\n", text);
-        fprintf (stderr, "     masks: '%s'\n", masks);
-        fprintf (stderr, "\n");
 
 	while (1)
 	{
@@ -321,8 +309,6 @@ is_hilight (char *from, char *text, session *sess, server *serv)
 
 	text = strip_color (text, -1, STRIP_ALL);
 
-        /* KFF: This is probably the departure point-of-interest for
-           nick highlighting. */
 	if (alert_match_text (text, serv->nick) ||
 		 alert_match_text (text, prefs.hex_irc_extra_hilight) ||
 		 alert_match_word (from, prefs.hex_irc_nick_hilight))

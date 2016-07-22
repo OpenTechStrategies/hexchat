@@ -550,18 +550,16 @@ buf_get_line (char *ibuf, char **buf, int *position, int len)
 	return 1;
 }
 
-/* KFF: this is where the match primitive lives. */
 int match(const char *mask, const char *string)
 {
   register const char *m = mask, *s = string;
   register char ch;
   const char *bm, *bs;		/* Will be reg anyway on a decent CPU/compiler */
 
-  /* We handle the case of single leading hyphen specially:
-
-     It's possible that STRING is a nickname, and if so, it's
-     important to match the corresponding mask even if STRING starts
-     with '-'.  Why?  Because of this common circumstance:
+  /* Handle the case of single leading hyphen specially.  It's
+     possible that STRING is a nickname, and if so, we want to
+     match the corresponding mask even if STRING starts with '-'.
+     Why?  Because of this common circumstance:
 
      If speaker Q hasn't identified to the server, then sometimes
      everything Q says is prefixed with a leading '-' (whether this
@@ -583,14 +581,7 @@ int match(const char *mask, const char *string)
      word from the same word without the hyphen), here we strip off a
      single leading hyphen from STRING before matching. */
   if (s[0] == '-')
-  {
-    fprintf (stderr, "KFF: match(): string and mask (on entry):\n");
-    fprintf (stderr, "     m:      '%s'\n", m);
-    fprintf (stderr, "     s:      '%s'\n", s);
     s++;
-    fprintf (stderr, "     new s:  '%s'\n", s);
-    fprintf (stderr, "\n");
-  }
 
   /* Process the "head" of the mask, if any */
   while ((ch = *m++) && (ch != '*'))
